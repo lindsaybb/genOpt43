@@ -1,6 +1,6 @@
 # genOpt43
 
-getOpt43 is an Iskratel PON utility program for converting TR069 ACS URL to a Hex-Encoded DHCP Option that enables the Innbox CPE to connect to this service at the point of Network Discovery
+genOpt43 is an Iskratel PON utility program for converting TR069 ACS URL to a Hex-Encoded DHCP Option that enables the Innbox CPE to connect to this service at the point of Network Discovery
 
 | Flag | Description |
 | ------ | ------ |
