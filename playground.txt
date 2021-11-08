@@ -1,0 +1,44 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+	"encoding/hex"
+)
+
+var val = "http://10.5.100.205:7547"
+
+
+func main() {
+	if strings.HasPrefix(val, "http") {
+		// encode
+		tmp := strings.Split(val, ":")
+		if len(tmp) != 3 {
+			fmt.Println("Encode format must include http://<hostname/ip>:<port>")
+			return
+		}
+		src := []byte(val)
+		enc := hex.EncodeToString(src)
+		num := (len(enc)) / 2
+		// format:
+		// Hex Identifier and Option Code: 0x01
+		// Hex value of Data Length without Hex Identifier
+		// Hex value of ACS server URL
+		out := fmt.Sprintf("0x01%x%s", num, enc)
+		fmt.Println(out)
+	} else if strings.HasPrefix(val, "0x01") {
+		// decode
+		// num := url[4:5] // data length in hex
+		dec, err := hex.DecodeString(val[6:])
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println(string(dec))
+		}
+	} else {
+		fmt.Println("Provide Encode value beginning with 'http' or Decode value beginning with '0x01'")
+		return
+	}
+  
+}
+
